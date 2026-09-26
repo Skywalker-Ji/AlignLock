@@ -1,0 +1,39 @@
+#!/bin/bash
+
+llamafactory-cli train \
+    --stage dpo \
+    --do_train True \
+    --model_name_or_path ./saves/instruction_tuning \
+    --preprocessing_num_workers 16 \
+    --finetuning_type freeze \
+    --template default \
+    --flash_attn auto \
+    --dataset_dir ./data \
+    --dataset dpo_saferlhf_10k \
+    --cutoff_len 2048 \
+    --learning_rate 3e-5 \
+    --num_train_epochs 3.0 \
+    --max_samples 100000 \
+    --per_device_train_batch_size 2 \
+    --gradient_accumulation_steps 8 \
+    --lr_scheduler_type cosine \
+    --max_grad_norm 1.0 \
+    --logging_steps 10 \
+    --save_steps 100 \
+    --warmup_steps 20 \
+    --packing False \
+    --report_to none \
+    --output_dir ./saves/targeted_safety_alignment \
+    --bf16 True \
+    --plot_loss True \
+    --trust_remote_code True \
+    --ddp_timeout 180000000 \
+    --include_num_input_tokens_seen True \
+    --optim adamw_torch \
+    --freeze_trainable_layers_start 2 \
+    --freeze_trainable_layers_end 18 \
+    --freeze_trainable_modules all \
+    --pref_beta 0.1 \
+    --pref_ftx 0 \
+    --pref_loss sigmoid \
+    --deepspeed examples/deepspeed/ds_z2_config.json

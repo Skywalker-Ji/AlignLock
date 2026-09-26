@@ -1,0 +1,15 @@
+# Install from the AlignLock root with Python 3.11.
+# Install a CUDA-compatible PyTorch build separately if required by your hardware.
+# Reuse the bundled training and generation dependency constraints.
+-r AlignLock-LLaMAFactory/requirements.txt
+-r strongreject/requirements-generation.txt
+
+# Compatible versions within the bundled LLaMA-Factory dependency ranges.
+# This file is not a lockfile of the original paper's experimental environment.
+transformers==4.49.0
+accelerate==1.2.1
+rouge-score==0.1.2
+tqdm>=4.66,<5
+
+# DeepSpeed, FlashAttention and quantization backends are optional.
+# Install them separately only when the selected training configuration needs them.
